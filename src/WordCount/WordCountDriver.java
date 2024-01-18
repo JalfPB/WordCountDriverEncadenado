@@ -37,8 +37,7 @@ public class WordCountDriver extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, new Path(args[args.length - 1] + "-output"));
 
         // Obtener el número total de palabras del primer trabajo
-        long numPalabras = job.getCounters().findCounter("org.apache.hadoop.mapred.Task$Counter", "REDUCE_OUTPUT_RECORDS").getValue();
-
+        long numPalabras = job.getCounters().findCounter("org.apache.hadoop.mapreduce.TaskCounter", "MAP_OUTPUT_RECORDS").getValue();
         // Segundo trabajo: Calcular porcentajes
         job = Job.getInstance(getConf());
         job.setJarByClass(getClass());
